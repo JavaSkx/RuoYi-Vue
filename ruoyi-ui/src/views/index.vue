@@ -1,31 +1,52 @@
 <template>
   <div class="app-container home">
-
+    <h1 style="color: lightslategray ">众所周知，水是生命资源。现今，地球上的水资源储量丰富，共有14.5亿立方千米之多。
+      尽管数量巨大，但是能供人类之间使用的水质资源少之甚少。
+      首先，海水又咸又苦，不能饮用，不能浇地，也难以用于工业。
+      其次，地球的淡水资源仅占其总水量的2.5%，而在这极少的淡水资源中，又有70%以上被冻结在南极和北极的冰盖中，加上难以利用的高山冰川和永冻积雪，有87%的淡水资源难以利用。
+      人类真正能够利用的淡水资源是江河湖泊和地下水中的一部分，约占地球总水量的0.26%。全球淡水资源不仅短缺而且地区分布极不平衡。
+      按地区分布，巴西、俄罗斯、加拿大、中国、美国、印度尼西亚、印度、哥伦比亚和刚果等9个国家的淡水资源占了世界淡水资源的60%。约占世界人口总数40%的80个国家和地区约15亿人口淡水不足，其中26个国家约3亿人极度缺水。
+      更可怕的是，预计到2025年，世界上将会有30亿人面临缺水，40个国家和地区淡水严重不足。
+      我国水资源面临先天不足和后天污染的双重困境。
+      主要特点为：首先，我国的水资源总体偏少；
+      第二，我国水资源空间分布十分不均匀；
+      第三，我们的问题是资源性缺水及水污染严重；
+      第四，我们的地下水过度取用；第五，水生态环境破坏严重。
+      因此在水资源问题面临严峻挑战时刻，保护、监管水资源是当前的热点问题。
+      基于OneNet平台的水质检测，可以对我国水质进行实时监控。
+      一方面对于水质问题早发现早治理早解决；
+      另一方面利用当前的物联网技术可以节约人力和时间成本，并且具有高效性。
+      将监测数据以可视化的形式展现出来，通过综合指数法完成对水质的评定，实现监测数据采集后的分析与评价为水质的监测工作、管理以及维护提供了很多客观、有效的依据。
+    </h1>
   </div>
 </template>
 
 <script>
-export default {
-  name: "Index",
-  data() {
-    return {
-      // 版本号
-      version: "3.8.5"
-    };
-  },
-  methods: {
-    goTarget(href) {
-      window.open(href, "_blank");
-    }
-  }
-};
+import LineChart from '@/views/dashboard/LineChart'
+// export default {
+//   name: "Index",
+//   components: { LineChart },
+//   data() {
+//     return {
+//       // 版本号
+//       version: "3.8.5"
+//     };
+//   },
+//   methods: {
+//     goTarget(href) {
+//       window.open(href, "_blank");
+//     }
+//   }
+// };
 </script>
 
 <style scoped lang="scss">
 .home {
-  width: 10%;
-  height: 100%;
-  background-image: url("../assets/images/OIP-C.jpg");
+  //width: 10%;
+  //height: 10%;
+  line-height: 100px;
+  text-align: center;
+  //background-image: url("../assets/images/OIP-C.jpg");
 
 }
 </style>
