@@ -23,8 +23,7 @@ import com.ruoyi.framework.config.ServerConfig;
 
 /**
  * 通用请求处理
- * 
- * @author ruoyi
+ *
  */
 @RestController
 @RequestMapping("/common")
@@ -39,7 +38,7 @@ public class CommonController
 
     /**
      * 通用下载请求
-     * 
+     *
      * @param fileName 文件名称
      * @param delete 是否删除
      */

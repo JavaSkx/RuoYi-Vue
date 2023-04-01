@@ -33,8 +33,7 @@ import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 角色信息
- * 
- * @author ruoyi
+ *
  */
 @RestController
 @RequestMapping("/system/role")
@@ -125,7 +124,7 @@ public class SysRoleController extends BaseController
             return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setUpdateBy(getUsername());
-        
+
         if (roleService.updateRole(role) > 0)
         {
             // 更新缓存用户权限

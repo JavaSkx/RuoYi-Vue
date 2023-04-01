@@ -3,18 +3,18 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysWaterMapper">
-    
+
     <resultMap type="SysWater" id="SysWaterResult">
         <result property="waterId"    column="water_id"    />
         <result property="waterName"    column="water_name"    />
         <result property="ph"    column="ph"    />
-        <result property="Do"    column="Do"    />
-        <result property="PV"    column="PV"    />
-        <result property="COD"    column="COD"    />
-        <result property="BOD"    column="BOD"    />
-        <result property="NHN"    column="NHN"    />
-        <result property="P"    column="P"    />
-        <result property="N"    column="N"    />
+        <result property="ddo"    column="Do"    />
+        <result property="pv"    column="PV"    />
+        <result property="cod"    column="COD"    />
+        <result property="bod"    column="BOD"    />
+        <result property="nhn"    column="NHN"    />
+        <result property="p"    column="P"    />
+        <result property="n"    column="N"    />
         <result property="cu"    column="cu"    />
         <result property="zn"    column="zn"    />
         <result property="delFlag"    column="del_flag"    />
@@ -30,17 +30,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectSysWaterList" parameterType="SysWater" resultMap="SysWaterResult">
         <include refid="selectSysWaterVo"/>
-        <where>  
+        <where>
             <if test="waterName != null  and waterName != ''"> and water_name like concat('%', #{waterName}, '%')</if>
             <if test="updateTime != null "> and update_time = #{updateTime}</if>
         </where>
     </select>
-    
+
     <select id="selectSysWaterByWaterId" parameterType="Long" resultMap="SysWaterResult">
         <include refid="selectSysWaterVo"/>
         where water_id = #{waterId}
     </select>
-        
+
     <insert id="insertSysWater" parameterType="SysWater" useGeneratedKeys="true" keyProperty="waterId">
         insert into sys_water
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -109,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSysWaterByWaterIds" parameterType="String">
-        delete from sys_water where water_id in 
+        delete from sys_water where water_id in
         <foreach item="waterId" collection="array" open="(" separator="," close=")">
             #{waterId}
         </foreach>

@@ -9,7 +9,6 @@ import com.ruoyi.common.utils.StringUtils;
 /**
  * 首页
  *
- * @author ruoyi
  */
 @RestController
 public class SysIndexController

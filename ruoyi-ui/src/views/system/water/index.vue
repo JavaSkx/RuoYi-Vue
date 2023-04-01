@@ -74,16 +74,16 @@
       <el-table-column label="水域ID" align="center" prop="waterId" />
       <el-table-column label="河流名称" align="center" prop="waterName" />
       <el-table-column label="PH值" align="center" prop="ph" />
-      <el-table-column label="溶解氧" align="center" prop="Do" />
-      <el-table-column label="高猛酸盐指数" align="center" prop="PV" />
-      <el-table-column label="化学需氧量" align="center" prop="COD" />
-      <el-table-column label="五日生化需氧量" align="center" prop="BOD" />
-      <el-table-column label="氨氮" align="center" prop="NHN" />
-      <el-table-column label="总磷" align="center" prop="P" />
-      <el-table-column label="总氮" align="center" prop="N" />
+      <el-table-column label="溶解氧" align="center" prop="ddo" />
+      <el-table-column label="高猛酸盐指数" align="center" prop="pv" />
+      <el-table-column label="化学需氧量" align="center" prop="cod" />
+      <el-table-column label="五日生化需氧量" align="center" prop="bod" />
+      <el-table-column label="氨氮" align="center" prop="nhn" />
+      <el-table-column label="总磷" align="center" prop="p" />
+      <el-table-column label="总氮" align="center" prop="n" />
       <el-table-column label="铜" align="center" prop="cu" />
       <el-table-column label="锌" align="center" prop="zn" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -100,9 +100,9 @@
             v-hasPermi="['system:water:remove']"
           >删除</el-button>
         </template>
-      </el-table-column>
+      </el-table-column>-->
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -121,25 +121,25 @@
           <el-input v-model="form.ph" placeholder="请输入PH值" />
         </el-form-item>
         <el-form-item label="溶解氧" prop="Do">
-          <el-input v-model="form.Do" placeholder="请输入溶解氧" />
+          <el-input v-model="form.ddo" placeholder="请输入溶解氧" />
         </el-form-item>
         <el-form-item label="高猛酸盐指数" prop="PV">
-          <el-input v-model="form.PV" placeholder="请输入高猛酸盐指数" />
+          <el-input v-model="form.pv" placeholder="请输入高猛酸盐指数" />
         </el-form-item>
         <el-form-item label="化学需氧量" prop="COD">
-          <el-input v-model="form.COD" placeholder="请输入化学需氧量" />
+          <el-input v-model="form.cod" placeholder="请输入化学需氧量" />
         </el-form-item>
         <el-form-item label="五日生化需氧量" prop="BOD">
-          <el-input v-model="form.BOD" placeholder="请输入五日生化需氧量" />
+          <el-input v-model="form.bod" placeholder="请输入五日生化需氧量" />
         </el-form-item>
         <el-form-item label="氨氮" prop="NHN">
-          <el-input v-model="form.NHN" placeholder="请输入氨氮" />
+          <el-input v-model="form.nhn" placeholder="请输入氨氮" />
         </el-form-item>
         <el-form-item label="总磷" prop="P">
-          <el-input v-model="form.P" placeholder="请输入总磷" />
+          <el-input v-model="form.p" placeholder="请输入总磷" />
         </el-form-item>
         <el-form-item label="总氮" prop="N">
-          <el-input v-model="form.N" placeholder="请输入总氮" />
+          <el-input v-model="form.n" placeholder="请输入总氮" />
         </el-form-item>
         <el-form-item label="铜" prop="cu">
           <el-input v-model="form.cu" placeholder="请输入铜" />
@@ -201,25 +201,25 @@ export default {
         ph: [
           { required: true, message: "PH值不能为空", trigger: "blur" }
         ],
-        Do: [
+        ddo: [
           { required: true, message: "溶解氧不能为空", trigger: "blur" }
         ],
-        PV: [
+        pv: [
           { required: true, message: "高猛酸盐指数不能为空", trigger: "blur" }
         ],
-        COD: [
+        cod: [
           { required: true, message: "化学需氧量不能为空", trigger: "blur" }
         ],
-        BOD: [
+        bod: [
           { required: true, message: "五日生化需氧量不能为空", trigger: "blur" }
         ],
-        NHN: [
+        nhn: [
           { required: true, message: "氨氮不能为空", trigger: "blur" }
         ],
-        P: [
+        p: [
           { required: true, message: "总磷不能为空", trigger: "blur" }
         ],
-        N: [
+        n: [
           { required: true, message: "总氮不能为空", trigger: "blur" }
         ],
         cu: [
@@ -255,13 +255,13 @@ export default {
         waterId: null,
         waterName: null,
         ph: null,
-        Do: null,
-        PV: null,
-        COD: null,
-        BOD: null,
-        NHN: null,
-        P: null,
-        N: null,
+        ddo: null,
+        pv: null,
+        cod: null,
+        bod: null,
+        nhn: null,
+        p: null,
+        n: null,
         cu: null,
         zn: null,
         delFlag: null,

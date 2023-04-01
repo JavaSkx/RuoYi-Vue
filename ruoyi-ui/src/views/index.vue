@@ -22,31 +22,13 @@
 </template>
 
 <script>
-import LineChart from '@/views/dashboard/LineChart'
-// export default {
-//   name: "Index",
-//   components: { LineChart },
-//   data() {
-//     return {
-//       // 版本号
-//       version: "3.8.5"
-//     };
-//   },
-//   methods: {
-//     goTarget(href) {
-//       window.open(href, "_blank");
-//     }
-//   }
-// };
+
 </script>
 
 <style scoped lang="scss">
 .home {
-  //width: 10%;
-  //height: 10%;
   line-height: 100px;
   text-align: center;
-  //background-image: url("../assets/images/OIP-C.jpg");
 
 }
 </style>
