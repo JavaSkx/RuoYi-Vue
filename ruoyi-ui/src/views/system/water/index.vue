@@ -79,7 +79,6 @@
 
     <el-table v-loading="loading" :data="waterList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="水域ID" align="center" prop="waterId" />
       <el-table-column label="河流名称" align="center" prop="waterName" />
       <el-table-column label="PH值" align="center" prop="ph" />
       <el-table-column label="溶解氧" align="center" prop="ddo" />
@@ -111,7 +110,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
