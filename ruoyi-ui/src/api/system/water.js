@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询水质信息查询列表
+// 查询水质信息管理列表
 export function listWater(query) {
   return request({
     url: '/system/water/list',
@@ -9,7 +9,7 @@ export function listWater(query) {
   })
 }
 
-// 查询水质信息查询详细
+// 查询水质信息管理详细
 export function getWater(waterId) {
   return request({
     url: '/system/water/' + waterId,
@@ -17,7 +17,7 @@ export function getWater(waterId) {
   })
 }
 
-// 新增水质信息查询
+// 新增水质信息管理
 export function addWater(data) {
   return request({
     url: '/system/water',
@@ -26,7 +26,7 @@ export function addWater(data) {
   })
 }
 
-// 修改水质信息查询
+// 修改水质信息管理
 export function updateWater(data) {
   return request({
     url: '/system/water',
@@ -35,7 +35,7 @@ export function updateWater(data) {
   })
 }
 
-// 删除水质信息查询
+// 删除水质信息管理
 export function delWater(waterId) {
   return request({
     url: '/system/water/' + waterId,
