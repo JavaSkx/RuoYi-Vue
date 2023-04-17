@@ -7,7 +7,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 水质信息管理对象 sys_water
- * 
+ *
  * @author JavaSkx
  * @date 2023-04-17
  */
@@ -69,129 +69,129 @@ public class SysWater extends BaseEntity
     @Excel(name = "水质等级")
     private String rk;
 
-    public void setWaterId(Long waterId) 
+    public void setWaterId(Long waterId)
     {
         this.waterId = waterId;
     }
 
-    public Long getWaterId() 
+    public Long getWaterId()
     {
         return waterId;
     }
-    public void setWaterName(String waterName) 
+    public void setWaterName(String waterName)
     {
         this.waterName = waterName;
     }
 
-    public String getWaterName() 
+    public String getWaterName()
     {
         return waterName;
     }
-    public void setPh(Long ph) 
+    public void setPh(Long ph)
     {
         this.ph = ph;
     }
 
-    public Long getPh() 
+    public Long getPh()
     {
         return ph;
     }
-    public void setDdo(Long ddo) 
+    public void setDdo(Long ddo)
     {
         this.ddo = ddo;
     }
 
-    public Long getDdo() 
+    public Long getDdo()
     {
         return ddo;
     }
-    public void setPv(Long pv) 
+    public void setPv(Long pv)
     {
         this.pv = pv;
     }
 
-    public Long getPv() 
+    public Long getPv()
     {
         return pv;
     }
-    public void setCod(Long cod) 
+    public void setCod(Long cod)
     {
         this.cod = cod;
     }
 
-    public Long getCod() 
+    public Long getCod()
     {
         return cod;
     }
-    public void setBod(Long bod) 
+    public void setBod(Long bod)
     {
         this.bod = bod;
     }
 
-    public Long getBod() 
+    public Long getBod()
     {
         return bod;
     }
-    public void setNhn(Long nhn) 
+    public void setNhn(Long nhn)
     {
         this.nhn = nhn;
     }
 
-    public Long getNhn() 
+    public Long getNhn()
     {
         return nhn;
     }
-    public void setP(Long p) 
+    public void setP(Long p)
     {
         this.p = p;
     }
 
-    public Long getP() 
+    public Long getP()
     {
         return p;
     }
-    public void setN(Long n) 
+    public void setN(Long n)
     {
         this.n = n;
     }
 
-    public Long getN() 
+    public Long getN()
     {
         return n;
     }
-    public void setCu(Long cu) 
+    public void setCu(Long cu)
     {
         this.cu = cu;
     }
 
-    public Long getCu() 
+    public Long getCu()
     {
         return cu;
     }
-    public void setZn(Long zn) 
+    public void setZn(Long zn)
     {
         this.zn = zn;
     }
 
-    public Long getZn() 
+    public Long getZn()
     {
         return zn;
     }
-    public void setDelFlag(String delFlag) 
+    public void setDelFlag(String delFlag)
     {
         this.delFlag = delFlag;
     }
 
-    public String getDelFlag() 
+    public String getDelFlag()
     {
         return delFlag;
     }
-    public void setRk(String rk) 
+    public void setRk(String rk)
     {
         this.rk = rk;
     }
 
-    public String getRk() 
+    public String getRk()
     {
         return rk;
     }
@@ -199,24 +199,24 @@ public class SysWater extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("waterId", getWaterId())
-            .append("waterName", getWaterName())
-            .append("ph", getPh())
-            .append("ddo", getDdo())
-            .append("pv", getPv())
-            .append("cod", getCod())
-            .append("bod", getBod())
-            .append("nhn", getNhn())
-            .append("p", getP())
-            .append("n", getN())
-            .append("cu", getCu())
-            .append("zn", getZn())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("rk", getRk())
-            .toString();
+                .append("waterId", getWaterId())
+                .append("waterName", getWaterName())
+                .append("ph", getPh())
+                .append("ddo", getDdo())
+                .append("pv", getPv())
+                .append("cod", getCod())
+                .append("bod", getBod())
+                .append("nhn", getNhn())
+                .append("p", getP())
+                .append("n", getN())
+                .append("cu", getCu())
+                .append("zn", getZn())
+                .append("delFlag", getDelFlag())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("rk", getRk())
+                .toString();
     }
 }

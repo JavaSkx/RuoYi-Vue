@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysWaterMapper">
-    
+
     <resultMap type="SysWater" id="SysWaterResult">
         <result property="waterId"    column="water_id"    />
         <result property="waterName"    column="water_name"    />
@@ -31,18 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectSysWaterList" parameterType="SysWater" resultMap="SysWaterResult">
         <include refid="selectSysWaterVo"/>
-        <where>  
+        <where>
             <if test="waterName != null  and waterName != ''"> and water_name like concat('%', #{waterName}, '%')</if>
             <if test="updateTime != null "> and update_time = #{updateTime}</if>
             <if test="rk != null  and rk != ''"> and rk = #{rk}</if>
         </where>
     </select>
-    
+
     <select id="selectSysWaterByWaterId" parameterType="Long" resultMap="SysWaterResult">
         <include refid="selectSysWaterVo"/>
         where water_id = #{waterId}
     </select>
-        
+
     <insert id="insertSysWater" parameterType="SysWater" useGeneratedKeys="true" keyProperty="waterId">
         insert into sys_water
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="rk != null and rk != ''">rk,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="waterName != null and waterName != ''">#{waterName},</if>
             <if test="ph != null">#{ph},</if>
@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="rk != null and rk != ''">#{rk},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateSysWater" parameterType="SysWater">
@@ -114,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSysWaterByWaterIds" parameterType="String">
-        delete from sys_water where water_id in 
+        delete from sys_water where water_id in
         <foreach item="waterId" collection="array" open="(" separator="," close=")">
             #{waterId}
         </foreach>

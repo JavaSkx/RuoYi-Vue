@@ -5,15 +5,15 @@ import com.ruoyi.system.domain.SysWater;
 
 /**
  * 水质信息管理Service接口
- * 
+ *
  * @author JavaSkx
  * @date 2023-04-17
  */
-public interface ISysWaterService 
+public interface ISysWaterService
 {
     /**
      * 查询水质信息管理
-     * 
+     *
      * @param waterId 水质信息管理主键
      * @return 水质信息管理
      */
@@ -21,7 +21,7 @@ public interface ISysWaterService
 
     /**
      * 查询水质信息管理列表
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 水质信息管理集合
      */
@@ -29,7 +29,7 @@ public interface ISysWaterService
 
     /**
      * 新增水质信息管理
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface ISysWaterService
 
     /**
      * 修改水质信息管理
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface ISysWaterService
 
     /**
      * 批量删除水质信息管理
-     * 
+     *
      * @param waterIds 需要删除的水质信息管理主键集合
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface ISysWaterService
 
     /**
      * 删除水质信息管理信息
-     * 
+     *
      * @param waterId 水质信息管理主键
      * @return 结果
      */

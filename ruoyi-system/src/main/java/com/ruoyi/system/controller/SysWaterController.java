@@ -23,7 +23,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 水质信息管理Controller
- * 
+ *
  * @author JavaSkx
  * @date 2023-04-17
  */
@@ -96,7 +96,7 @@ public class SysWaterController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:water:remove')")
     @Log(title = "水质信息管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{waterIds}")
+    @DeleteMapping("/{waterIds}")
     public AjaxResult remove(@PathVariable Long[] waterIds)
     {
         return toAjax(sysWaterService.deleteSysWaterByWaterIds(waterIds));

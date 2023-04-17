@@ -11,10 +11,10 @@
       </el-form-item>
       <el-form-item label="更新时间" prop="updateTime">
         <el-date-picker clearable
-          v-model="queryParams.updateTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择更新时间">
+                        v-model="queryParams.updateTime"
+                        type="date"
+                        value-format="yyyy-MM-dd"
+                        placeholder="请选择更新时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="水质等级" prop="rk">
@@ -79,6 +79,7 @@
 
     <el-table v-loading="loading" :data="waterList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+      <el-table-column label="水域ID" align="center" prop="waterId" />
       <el-table-column label="河流名称" align="center" prop="waterName" />
       <el-table-column label="PH值" align="center" prop="ph" />
       <el-table-column label="溶解氧" align="center" prop="ddo" />
@@ -90,6 +91,11 @@
       <el-table-column label="总氮" align="center" prop="n" />
       <el-table-column label="铜" align="center" prop="cu" />
       <el-table-column label="锌" align="center" prop="zn" />
+      <el-table-column label="更新时间" align="center" prop="updateTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d}') }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="水质等级" align="center" prop="rk" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -236,6 +242,9 @@ export default {
         ],
         zn: [
           { required: true, message: "锌不能为空", trigger: "blur" }
+        ],
+        updateTime: [
+          { required: true, message: "更新时间不能为空", trigger: "blur" }
         ],
         rk: [
           { required: true, message: "水质等级不能为空", trigger: "blur" }

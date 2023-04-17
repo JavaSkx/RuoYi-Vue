@@ -10,19 +10,19 @@ import com.ruoyi.system.service.ISysWaterService;
 
 /**
  * 水质信息管理Service业务层处理
- * 
+ *
  * @author JavaSkx
  * @date 2023-04-17
  */
 @Service
-public class SysWaterServiceImpl implements ISysWaterService 
+public class SysWaterServiceImpl implements ISysWaterService
 {
     @Autowired
     private SysWaterMapper sysWaterMapper;
 
     /**
      * 查询水质信息管理
-     * 
+     *
      * @param waterId 水质信息管理主键
      * @return 水质信息管理
      */
@@ -34,7 +34,7 @@ public class SysWaterServiceImpl implements ISysWaterService
 
     /**
      * 查询水质信息管理列表
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 水质信息管理
      */
@@ -46,7 +46,7 @@ public class SysWaterServiceImpl implements ISysWaterService
 
     /**
      * 新增水质信息管理
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class SysWaterServiceImpl implements ISysWaterService
 
     /**
      * 修改水质信息管理
-     * 
+     *
      * @param sysWater 水质信息管理
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class SysWaterServiceImpl implements ISysWaterService
 
     /**
      * 批量删除水质信息管理
-     * 
+     *
      * @param waterIds 需要删除的水质信息管理主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class SysWaterServiceImpl implements ISysWaterService
 
     /**
      * 删除水质信息管理信息
-     * 
+     *
      * @param waterId 水质信息管理主键
      * @return 结果
      */
