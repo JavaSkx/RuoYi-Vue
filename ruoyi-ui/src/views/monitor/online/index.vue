@@ -33,7 +33,7 @@
           <span>{{(pageNum - 1) * pageSize + scope.$index + 1}}</span>
         </template>
       </el-table-column>
-      <el-table-column label="会话编号" align="center" prop="tokenId" :show-overflow-tooltip="true" />
+<!--      <el-table-column label="会话编号" align="center" prop="tokenId" :show-overflow-tooltip="true" />-->
       <el-table-column label="登录名称" align="center" prop="userName" :show-overflow-tooltip="true" />
       <el-table-column label="部门名称" align="center" prop="deptName" />
       <el-table-column label="主机" align="center" prop="ipaddr" :show-overflow-tooltip="true" />

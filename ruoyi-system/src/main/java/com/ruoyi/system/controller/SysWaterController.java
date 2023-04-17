@@ -22,10 +22,10 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 水质信息查询Controller
+ * 水质信息管理Controller
  * 
  * @author JavaSkx
- * @date 2023-03-28
+ * @date 2023-04-17
  */
 @RestController
 @RequestMapping("/system/water")
@@ -35,7 +35,7 @@ public class SysWaterController extends BaseController
     private ISysWaterService sysWaterService;
 
     /**
-     * 查询水质信息查询列表
+     * 查询水质信息管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:water:list')")
     @GetMapping("/list")
@@ -47,20 +47,20 @@ public class SysWaterController extends BaseController
     }
 
     /**
-     * 导出水质信息查询列表
+     * 导出水质信息管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:water:export')")
-    @Log(title = "水质信息查询", businessType = BusinessType.EXPORT)
+    @Log(title = "水质信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysWater sysWater)
     {
         List<SysWater> list = sysWaterService.selectSysWaterList(sysWater);
         ExcelUtil<SysWater> util = new ExcelUtil<SysWater>(SysWater.class);
-        util.exportExcel(response, list, "水质信息查询数据");
+        util.exportExcel(response, list, "水质信息管理数据");
     }
 
     /**
-     * 获取水质信息查询详细信息
+     * 获取水质信息管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:water:query')")
     @GetMapping(value = "/{waterId}")
@@ -70,10 +70,10 @@ public class SysWaterController extends BaseController
     }
 
     /**
-     * 新增水质信息查询
+     * 新增水质信息管理
      */
     @PreAuthorize("@ss.hasPermi('system:water:add')")
-    @Log(title = "水质信息查询", businessType = BusinessType.INSERT)
+    @Log(title = "水质信息管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SysWater sysWater)
     {
@@ -81,10 +81,10 @@ public class SysWaterController extends BaseController
     }
 
     /**
-     * 修改水质信息查询
+     * 修改水质信息管理
      */
     @PreAuthorize("@ss.hasPermi('system:water:edit')")
-    @Log(title = "水质信息查询", businessType = BusinessType.UPDATE)
+    @Log(title = "水质信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SysWater sysWater)
     {
@@ -92,10 +92,10 @@ public class SysWaterController extends BaseController
     }
 
     /**
-     * 删除水质信息查询
+     * 删除水质信息管理
      */
     @PreAuthorize("@ss.hasPermi('system:water:remove')")
-    @Log(title = "水质信息查询", businessType = BusinessType.DELETE)
+    @Log(title = "水质信息管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{waterIds}")
     public AjaxResult remove(@PathVariable Long[] waterIds)
     {

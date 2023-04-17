@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="waterName != null and waterName != ''">#{waterName},</if>
             <if test="ph != null">#{ph},</if>
-            <if test="Do != null">#{Do},</if>
+            <if test="Do != null">#{ddo},</if>
             <if test="PV != null">#{PV},</if>
             <if test="COD != null">#{COD},</if>
             <if test="BOD != null">#{BOD},</if>
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="waterName != null and waterName != ''">water_name = #{waterName},</if>
             <if test="ph != null">ph = #{ph},</if>
-            <if test="Do != null">Do = #{Do},</if>
+            <if test="Do != null">Do = #{ddo},</if>
             <if test="PV != null">PV = #{PV},</if>
             <if test="COD != null">COD = #{COD},</if>
             <if test="BOD != null">BOD = #{BOD},</if>

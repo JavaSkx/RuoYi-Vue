@@ -11,10 +11,11 @@
       </el-form-item>
       <el-form-item label="更新时间" prop="updateTime">
         <el-date-picker clearable
-          v-model="queryParams.updateTime"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="请选择更新时间">
+                        v-model="queryParams.updateTime"
+                        type="date"
+                        value-format="yyyy-MM-dd"
+                        placeholder="请选择更新时间"
+        >
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -32,7 +33,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['system:water:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -43,7 +45,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['system:water:edit']"
-        >修改</el-button>
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -54,7 +57,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['system:water:remove']"
-        >删除</el-button>
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -64,43 +68,26 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['system:water:export']"
-        >导出</el-button>
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="waterList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="水域ID" align="center" prop="waterId" />
-      <el-table-column label="河流名称" align="center" prop="waterName" />
-      <el-table-column label="PH值" align="center" prop="ph" />
-      <el-table-column label="溶解氧" align="center" prop="ddo" />
-      <el-table-column label="高猛酸盐指数" align="center" prop="pv" />
-      <el-table-column label="化学需氧量" align="center" prop="cod" />
-      <el-table-column label="五日生化需氧量" align="center" prop="bod" />
-      <el-table-column label="氨氮" align="center" prop="nhn" />
-      <el-table-column label="总磷" align="center" prop="p" />
-      <el-table-column label="总氮" align="center" prop="n" />
-      <el-table-column label="铜" align="center" prop="cu" />
-      <el-table-column label="锌" align="center" prop="zn" />
-<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:water:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['system:water:remove']"
-          >删除</el-button>
-        </template>
-      </el-table-column>-->
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="河流名称" align="center" prop="waterName"/>
+      <el-table-column label="PH值" align="center" prop="ph"/>
+      <el-table-column label="溶解氧" align="center" prop="ddo"/>
+      <el-table-column label="高猛酸盐指数" align="center" prop="pv"/>
+      <el-table-column label="化学需氧量" align="center" prop="cod"/>
+      <el-table-column label="五日生化需氧量" align="center" prop="bod"/>
+      <el-table-column label="氨氮" align="center" prop="nhn"/>
+      <el-table-column label="总磷" align="center" prop="p"/>
+      <el-table-column label="总氮" align="center" prop="n"/>
+      <el-table-column label="铜" align="center" prop="cu"/>
+      <el-table-column label="锌" align="center" prop="zn"/>
+      <el-table-column label="日期" align="center" prop="updateTime"/>
     </el-table>
 
     <pagination
@@ -115,40 +102,40 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="河流名称" prop="waterName">
-          <el-input v-model="form.waterName" placeholder="请输入河流名称" />
+          <el-input v-model="form.waterName" placeholder="请输入河流名称"/>
         </el-form-item>
         <el-form-item label="PH值" prop="ph">
-          <el-input v-model="form.ph" placeholder="请输入PH值" />
+          <el-input v-model="form.ph" placeholder="请输入PH值"/>
         </el-form-item>
         <el-form-item label="溶解氧" prop="Do">
-          <el-input v-model="form.ddo" placeholder="请输入溶解氧" />
+          <el-input v-model="form.ddo" placeholder="请输入溶解氧"/>
         </el-form-item>
         <el-form-item label="高猛酸盐指数" prop="PV">
-          <el-input v-model="form.pv" placeholder="请输入高猛酸盐指数" />
+          <el-input v-model="form.pv" placeholder="请输入高猛酸盐指数"/>
         </el-form-item>
         <el-form-item label="化学需氧量" prop="COD">
-          <el-input v-model="form.cod" placeholder="请输入化学需氧量" />
+          <el-input v-model="form.cod" placeholder="请输入化学需氧量"/>
         </el-form-item>
         <el-form-item label="五日生化需氧量" prop="BOD">
-          <el-input v-model="form.bod" placeholder="请输入五日生化需氧量" />
+          <el-input v-model="form.bod" placeholder="请输入五日生化需氧量"/>
         </el-form-item>
         <el-form-item label="氨氮" prop="NHN">
-          <el-input v-model="form.nhn" placeholder="请输入氨氮" />
+          <el-input v-model="form.nhn" placeholder="请输入氨氮"/>
         </el-form-item>
         <el-form-item label="总磷" prop="P">
-          <el-input v-model="form.p" placeholder="请输入总磷" />
+          <el-input v-model="form.p" placeholder="请输入总磷"/>
         </el-form-item>
         <el-form-item label="总氮" prop="N">
-          <el-input v-model="form.n" placeholder="请输入总氮" />
+          <el-input v-model="form.n" placeholder="请输入总氮"/>
         </el-form-item>
         <el-form-item label="铜" prop="cu">
-          <el-input v-model="form.cu" placeholder="请输入铜" />
+          <el-input v-model="form.cu" placeholder="请输入铜"/>
         </el-form-item>
         <el-form-item label="锌" prop="zn">
-          <el-input v-model="form.zn" placeholder="请输入锌" />
+          <el-input v-model="form.zn" placeholder="请输入锌"/>
         </el-form-item>
         <el-form-item label="删除标志" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标志" />
+          <el-input v-model="form.delFlag" placeholder="请输入删除标志"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -160,10 +147,10 @@
 </template>
 
 <script>
-import { listWater, getWater, delWater, addWater, updateWater } from "@/api/system/water";
+import { listWater, getWater, delWater, addWater, updateWater } from '@/api/system/water'
 
 export default {
-  name: "Water",
+  name: 'Water',
   data() {
     return {
       // 遮罩层
@@ -181,7 +168,7 @@ export default {
       // 水质信息查询表格数据
       waterList: [],
       // 弹出层标题
-      title: "",
+      title: '',
       // 是否显示弹出层
       open: false,
       // 查询参数
@@ -196,58 +183,58 @@ export default {
       // 表单校验
       rules: {
         waterName: [
-          { required: true, message: "河流名称不能为空", trigger: "blur" }
+          { required: true, message: '河流名称不能为空', trigger: 'blur' }
         ],
         ph: [
-          { required: true, message: "PH值不能为空", trigger: "blur" }
+          { required: true, message: 'PH值不能为空', trigger: 'blur' }
         ],
         ddo: [
-          { required: true, message: "溶解氧不能为空", trigger: "blur" }
+          { required: true, message: '溶解氧不能为空', trigger: 'blur' }
         ],
         pv: [
-          { required: true, message: "高猛酸盐指数不能为空", trigger: "blur" }
+          { required: true, message: '高猛酸盐指数不能为空', trigger: 'blur' }
         ],
         cod: [
-          { required: true, message: "化学需氧量不能为空", trigger: "blur" }
+          { required: true, message: '化学需氧量不能为空', trigger: 'blur' }
         ],
         bod: [
-          { required: true, message: "五日生化需氧量不能为空", trigger: "blur" }
+          { required: true, message: '五日生化需氧量不能为空', trigger: 'blur' }
         ],
         nhn: [
-          { required: true, message: "氨氮不能为空", trigger: "blur" }
+          { required: true, message: '氨氮不能为空', trigger: 'blur' }
         ],
         p: [
-          { required: true, message: "总磷不能为空", trigger: "blur" }
+          { required: true, message: '总磷不能为空', trigger: 'blur' }
         ],
         n: [
-          { required: true, message: "总氮不能为空", trigger: "blur" }
+          { required: true, message: '总氮不能为空', trigger: 'blur' }
         ],
         cu: [
-          { required: true, message: "铜不能为空", trigger: "blur" }
+          { required: true, message: '铜不能为空', trigger: 'blur' }
         ],
         zn: [
-          { required: true, message: "锌不能为空", trigger: "blur" }
-        ],
+          { required: true, message: '锌不能为空', trigger: 'blur' }
+        ]
       }
-    };
+    }
   },
   created() {
-    this.getList();
+    this.getList()
   },
   methods: {
     /** 查询水质信息查询列表 */
     getList() {
-      this.loading = true;
+      this.loading = true
       listWater(this.queryParams).then(response => {
-        this.waterList = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
+        this.waterList = response.rows
+        this.total = response.total
+        this.loading = false
+      })
     },
     // 取消按钮
     cancel() {
-      this.open = false;
-      this.reset();
+      this.open = false
+      this.reset()
     },
     // 表单重置
     reset() {
@@ -269,70 +256,71 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null
-      };
-      this.resetForm("form");
+      }
+      this.resetForm('form')
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1;
-      this.getList();
+      this.queryParams.pageNum = 1
+      this.getList()
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
+      this.resetForm('queryForm')
+      this.handleQuery()
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.waterId)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.reset();
-      this.open = true;
-      this.title = "添加水质信息查询";
+      this.reset()
+      this.open = true
+      this.title = '添加水质信息查询'
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset();
+      this.reset()
       const waterId = row.waterId || this.ids
       getWater(waterId).then(response => {
-        this.form = response.data;
-        this.open = true;
-        this.title = "修改水质信息查询";
-      });
+        this.form = response.data
+        this.open = true
+        this.title = '修改水质信息查询'
+      })
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.waterId != null) {
             updateWater(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
-            });
+              this.$modal.msgSuccess('修改成功')
+              this.open = false
+              this.getList()
+            })
           } else {
             addWater(this.form).then(response => {
-              this.$modal.msgSuccess("新增成功");
-              this.open = false;
-              this.getList();
-            });
+              this.$modal.msgSuccess('新增成功')
+              this.open = false
+              this.getList()
+            })
           }
         }
-      });
+      })
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const waterIds = row.waterId || this.ids;
+      const waterIds = row.waterId || this.ids
       this.$modal.confirm('是否确认删除水质信息查询编号为"' + waterIds + '"的数据项？').then(function() {
-        return delWater(waterIds);
+        return delWater(waterIds)
       }).then(() => {
-        this.getList();
-        this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+        this.getList()
+        this.$modal.msgSuccess('删除成功')
+      }).catch(() => {
+      })
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -341,5 +329,5 @@ export default {
       }, `water_${new Date().getTime()}.xlsx`)
     }
   }
-};
+}
 </script>

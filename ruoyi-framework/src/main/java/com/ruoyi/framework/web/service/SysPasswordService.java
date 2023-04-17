@@ -19,8 +19,8 @@ import com.ruoyi.framework.security.context.AuthenticationContextHolder;
 
 /**
  * 登录密码方法
- * 
- * @author ruoyi
+ *
+ *
  */
 @Component
 public class SysPasswordService
@@ -36,7 +36,7 @@ public class SysPasswordService
 
     /**
      * 登录账户密码错误次数缓存键名
-     * 
+     *
      * @param username 用户名
      * @return 缓存键key
      */

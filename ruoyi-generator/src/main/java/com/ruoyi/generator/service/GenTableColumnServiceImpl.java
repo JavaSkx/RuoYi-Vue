@@ -9,18 +9,18 @@ import com.ruoyi.generator.mapper.GenTableColumnMapper;
 
 /**
  * 业务字段 服务层实现
- * 
- * @author ruoyi
+ *
+ *
  */
 @Service
-public class GenTableColumnServiceImpl implements IGenTableColumnService 
+public class GenTableColumnServiceImpl implements IGenTableColumnService
 {
 	@Autowired
 	private GenTableColumnMapper genTableColumnMapper;
 
 	/**
      * 查询业务字段列表
-     * 
+     *
      * @param tableId 业务字段编号
      * @return 业务字段集合
      */
@@ -29,10 +29,10 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	{
 	    return genTableColumnMapper.selectGenTableColumnListByTableId(tableId);
 	}
-	
+
     /**
      * 新增业务字段
-     * 
+     *
      * @param genTableColumn 业务字段信息
      * @return 结果
      */
@@ -41,10 +41,10 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 	{
 	    return genTableColumnMapper.insertGenTableColumn(genTableColumn);
 	}
-	
+
 	/**
      * 修改业务字段
-     * 
+     *
      * @param genTableColumn 业务字段信息
      * @return 结果
      */
@@ -56,7 +56,7 @@ public class GenTableColumnServiceImpl implements IGenTableColumnService
 
 	/**
      * 删除业务字段对象
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
