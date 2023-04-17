@@ -26,8 +26,8 @@ import com.ruoyi.framework.datasource.DynamicDataSource;
 
 /**
  * druid 配置多数据源
- * 
- * @author ruoyi
+ *
+ *
  */
 @Configuration
 public class DruidConfig
@@ -58,10 +58,10 @@ public class DruidConfig
         setDataSource(targetDataSources, DataSourceType.SLAVE.name(), "slaveDataSource");
         return new DynamicDataSource(masterDataSource, targetDataSources);
     }
-    
+
     /**
      * 设置数据源
-     * 
+     *
      * @param targetDataSources 备选数据源集合
      * @param sourceName 数据源名称
      * @param beanName bean名称

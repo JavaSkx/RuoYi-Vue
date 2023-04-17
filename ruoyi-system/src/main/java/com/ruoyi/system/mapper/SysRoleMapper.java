@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * 角色表 数据层
  *
- * @author ruoyi
+ *
  */
 @Mapper
 public interface SysRoleMapper
