@@ -97,24 +97,24 @@
         </template>
       </el-table-column>
       <el-table-column label="水质等级" align="center" prop="rk" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:water:edit']"
-          >修改</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
-            v-hasPermi="['system:water:remove']"
-          >删除</el-button>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button-->
+<!--            size="mini"-->
+<!--            type="text"-->
+<!--            icon="el-icon-edit"-->
+<!--            @click="handleUpdate(scope.row)"-->
+<!--            v-hasPermi="['system:water:edit']"-->
+<!--          >修改</el-button>-->
+<!--          <el-button-->
+<!--            size="mini"-->
+<!--            type="text"-->
+<!--            icon="el-icon-delete"-->
+<!--            @click="handleDelete(scope.row)"-->
+<!--            v-hasPermi="['system:water:remove']"-->
+<!--          >删除</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
     </el-table>
 
     <pagination
@@ -163,6 +163,9 @@
         </el-form-item>
         <el-form-item label="水质等级" prop="rk">
           <el-input v-model="form.rk" placeholder="请输入水质等级" />
+        </el-form-item>
+        <el-form-item label="更新日期" prop="rk">
+          <el-input v-model="form.updateTime" placeholder="请输入更新日期" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
