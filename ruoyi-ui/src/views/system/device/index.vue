@@ -14,8 +14,8 @@
                                     <show-div :title="'在线设备数(个)'" :text="1" text-color="#C80000" />
                                 </el-col>
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
-                        
-                    
+
+
                                 <div style="float: right;margin-left: 400px;margin-top: 26px;">
                                     <el-button size="mini"><i class="el-icon-plus el-icon--left"></i>批量添加</el-button>
                                     <el-button size="mini" type="primary" @click="handleAdd"><i class="el-icon-plus el-icon--left"></i>添加设备</el-button>
@@ -36,7 +36,7 @@
                         </el-option>
                     </el-select>
 
-                    
+
                     <el-input placeholder="请输入搜索内容" v-model="queryParams.deviceName" class="input-with-select" size="small">
                         <el-select v-model="select" slot="prepend" placeholder="设备名称" class="select-low">
                             <el-option label="设备名称" value="1"></el-option>
@@ -78,7 +78,7 @@
                     <el-table-column
                         prop="lastTime"
                         label="最后在线时间">
-                    </el-table-column>  
+                    </el-table-column>
                     <el-table-column
                         fixed="right"
                         label="操作"
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-             <!-- 添加或修改水质信息管理对话框 -->
+             <!-- 添加或修改设备信息管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="设备名称" prop="deviceTitle">
@@ -134,7 +134,7 @@
     </div>
 
 
-  
+
 </template>
 
 
@@ -181,7 +181,7 @@ export default {
             this.deviceList = response.rows;
             this.total = response.total;
             this.loading = false;
-            
+
         });
        },
        /** 搜索按钮操作 */
@@ -211,8 +211,8 @@ export default {
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
     },
-     
-      
+
+
     },
     data() {
       return {list: [{
