@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Entity基类
- * 
+ *
  * @author ruoyi
  */
 public class BaseEntity implements Serializable
@@ -32,7 +32,7 @@ public class BaseEntity implements Serializable
     private String updateBy;
 
     /** 更新时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
 
     /** 备注 */
