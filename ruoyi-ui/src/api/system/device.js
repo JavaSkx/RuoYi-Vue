@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询设备信息管理列表
 export function listDevice(query) {
     return request({
-      url: 'http://api.heclouds.com/devices',
+      url: '/system/device/list',
       method: 'get',
       params: query
     })

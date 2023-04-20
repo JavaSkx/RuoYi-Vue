@@ -7,11 +7,11 @@
                         <el-card shadow="never" class="totalViewCard">
                              <el-row class="totalViewRow">
                                 <el-col :span="4">
-                                    <show-div :title="'设备数量(个)'" :text="1" />
+                                    <show-div :title="'设备数量(个)'" :text="deviceTotal" />
                                  </el-col>
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
                                 <el-col :span="4">
-                                    <show-div :title="'在线设备数(个)'" :text="1" text-color="#C80000" />
+                                    <show-div :title="'在线设备数(个)'" :text="onlineTotal" text-color="#C80000" />
                                 </el-col>
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
                         
@@ -27,7 +27,7 @@
 
             </div>
             <div class="search">
-                <el-select v-model="queryParams.deviceStatus" placeholder="在线状态(全部)" size="small" class="select-low">
+                <el-select v-model="queryParams.online" placeholder="在线状态(全部)" size="small" class="select-low">
                         <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -37,7 +37,7 @@
                     </el-select>
 
                     
-                    <el-input placeholder="请输入搜索内容" v-model="queryParams.deviceName" class="input-with-select" size="small">
+                    <el-input placeholder="请输入搜索内容" v-model="queryParams.title" class="input-with-select" size="small">
                         <el-select v-model="select" slot="prepend" placeholder="设备名称" class="select-low">
                             <el-option label="设备名称" value="1"></el-option>
                         </el-select>
@@ -54,7 +54,7 @@
                         width="200">
                     </el-table-column>
                     <el-table-column
-                        prop="name"
+                        prop="title"
                         label="设备名称"
                         width="200">
                     </el-table-column>
@@ -62,7 +62,7 @@
                         label="设备状态">
                         <template slot-scope="scope">
                             <div slot="reference" class="name-wrapper">
-                                <div v-if="scope.row.status=='1'">
+                                <div v-if="scope.row.online=='1'">
                                     <el-tag size="medium">
                                         在线
                                     </el-tag>
@@ -76,7 +76,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column
-                        prop="lastTime"
+                        prop="lastLogin"
                         label="最后在线时间">
                     </el-table-column>  
                     <el-table-column
@@ -181,7 +181,13 @@ export default {
             this.deviceList = response.rows;
             this.total = response.total;
             this.loading = false;
-            
+            this.deviceTotal = response.total;
+
+            for(let i=0;i<deviceList.length;i++){
+                if([deviceList].online==true){
+                   this.onlineTotal++;
+                }
+            }
         });
        },
        /** 搜索按钮操作 */
@@ -215,25 +221,15 @@ export default {
       
     },
     data() {
-      return {list: [{
-                id: '1061067886',
-                name: '南昌A流域水质检测',
-                status: '1',
-                lastTime: '2016-05-02 11:11:11'
-            }, {
-                id: '1061067887',
-                name: '南昌B流域水质检测',
-                address: '0',
-                lastTime: '2016-05-02 11:11:11'
-            }],
+      return {
             options: [{
-                value: '选项1',
+                value: '',
                 label: '在线状态(全部)'
             }, {
-                value: '选项2',
+                value: 'true',
                 label: '在线'
             }, {
-                value: '选项3',
+                value: 'false',
                 label: '离线'
             }],
             deviceList:[],
@@ -245,6 +241,8 @@ export default {
             currentPage3: 2,
             pageSize:100,
             total:150,
+            deviceTotal:0,
+            onlineTotal:0,
              // 表单参数
             form: {},
             rules: {
@@ -259,8 +257,8 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                deviceStatus: null,
-                deviceName: null
+                online: null,
+                title: null
             },
       }
     }
