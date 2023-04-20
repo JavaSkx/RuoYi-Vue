@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 水质信息管理对象 sys_water
+ * 设备信息管理对象 sys_water
  *
  * @author JavaSkx
  * @date 2023-04-17

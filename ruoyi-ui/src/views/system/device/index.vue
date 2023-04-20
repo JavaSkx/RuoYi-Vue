@@ -10,14 +10,14 @@
                                     <show-div :title="'设备数量(个)'" :text="deviceTotal" />
                                  </el-col>
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
-                                <el-col :span="4">
-                                    <show-div :title="'在线设备数(个)'" :text="onlineTotal" text-color="#C80000" />
-                                </el-col>
+<!--                                <el-col :span="4">-->
+<!--                                    <show-div :title="'在线设备数(个)'" :text="onlineTotal" text-color="#C80000" />-->
+<!--                                </el-col>-->
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
-                        
-                    
+
+
                                 <div style="float: right;margin-left: 400px;margin-top: 26px;">
-                                    <el-button size="mini"><i class="el-icon-plus el-icon--left"></i>批量添加</el-button>
+<!--                                    <el-button size="mini"><i class="el-icon-plus el-icon&#45;&#45;left"></i>批量添加</el-button>-->
                                     <el-button size="mini" type="primary" @click="handleAdd"><i class="el-icon-plus el-icon--left"></i>添加设备</el-button>
                                 </div>
                             </el-row>
@@ -36,7 +36,7 @@
                         </el-option>
                     </el-select>
 
-                    
+
                     <el-input placeholder="请输入搜索内容" v-model="queryParams.title" class="input-with-select" size="small">
                         <el-select v-model="select" slot="prepend" placeholder="设备名称" class="select-low">
                             <el-option label="设备名称" value="1"></el-option>
@@ -78,7 +78,7 @@
                     <el-table-column
                         prop="lastLogin"
                         label="最后在线时间">
-                    </el-table-column>  
+                    </el-table-column>
                     <el-table-column
                         fixed="right"
                         label="操作"
@@ -104,25 +104,25 @@
              <!-- 添加或修改设备信息管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="设备名称" prop="deviceTitle">
+        <el-form-item label="设备名称：" prop="deviceTitle">
           <el-input v-model="form.deviceTitle" placeholder="请输入设备名称" />
         </el-form-item>
-        <el-form-item label="设备描述" prop="desc">
-          <el-input v-model="form.desc" placeholder="请输入设备描述" />
-        </el-form-item>
-        <el-form-item label="设备标签" prop="tags">
-          <el-input v-model="form.tags" placeholder="请输入设备标签" />
-        </el-form-item>
-        <el-form-item label="坐标信息" prop="location">
-          <el-input v-model="form.location" placeholder="请输入设备坐标信息" />
-        </el-form-item>
-        <el-form-item label="私密性" prop="private">
-          <el-input v-model="form.private" placeholder="设备私密性" />
-        </el-form-item>
-        <el-form-item label="鉴权信息" prop="auth_info">
+        <el-form-item label="鉴权信息：" prop="auth_info">
           <el-input v-model="form.auth_info" placeholder="请输入设备鉴权信息" />
         </el-form-item>
-        <el-form-item label="自定义" prop="other">
+        <el-form-item label="设备私密性：" prop="private">
+          <el-input v-model="form.private" placeholder="私有/公开" />
+        </el-form-item>
+        <el-form-item label="设备描述：" prop="desc">
+          <el-input v-model="form.desc" placeholder="请输入设备描述" />
+        </el-form-item>
+        <el-form-item label="设备标签：" prop="tags">
+          <el-input v-model="form.tags" placeholder="请输入设备标签" />
+        </el-form-item>
+        <el-form-item label="坐标信息：" prop="location">
+          <el-input v-model="form.location" placeholder="请输入设备坐标信息" />
+        </el-form-item>
+        <el-form-item label="自定义：" prop="other">
           <el-input v-model="form.other" placeholder="请输入其他设备自定义信息" />
         </el-form-item>
       </el-form>
@@ -134,7 +134,7 @@
     </div>
 
 
-  
+
 </template>
 
 
@@ -217,8 +217,8 @@ export default {
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
     },
-     
-      
+
+
     },
     data() {
       return {
@@ -249,9 +249,12 @@ export default {
                 deviceTitle: [
                 { required: true, message: "设备名称不能为空", trigger: "blur" }
                 ],
-                desc: [
-                { required: true, message: "设备描述不能为空", trigger: "blur" }
-                ]
+                auth_info: [
+                { required: true, message: "鉴权信息不能为空", trigger: "blur" }
+                ],
+                private: [
+                { required: true, message: "设备私密性不能为空", trigger: "blur" }
+              ]
             },
                  // 查询参数
             queryParams: {

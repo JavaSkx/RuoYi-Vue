@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 水质信息管理Service业务层处理
+ * 设备信息管理Service业务层处理
  *
  * @author JavaSkx
- * @date 2023-04-17
+ * @date 2023-04-20
  */
 @Service
 public class SysDeviceServiceImpl implements ISysDeviceService

@@ -2,7 +2,7 @@ package com.ruoyi.system.domain.vo;
 
 /**
  * @Description:
- * @Author: Josen
+ * @Author: JavaSkx
  * @Date: 2023/4/20 15:24
  * @Version: 1.0
  */
