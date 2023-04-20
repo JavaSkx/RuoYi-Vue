@@ -9,7 +9,7 @@ export function listDevice(query) {
     })
 }
 
-// 查询水质信息管理详细
+// 查询设备信息管理详细
 export function getDevice(deviceId) {
     return request({
       url: '/system/device/' + deviceId,
@@ -38,7 +38,7 @@ export function updateDevice(data) {
 }
 
 
-// 删除水质信息管理
+// 删除设备信息管理
 export function delDevice(deviceId) {
     return request({
       url: '/system/device/' + deviceId,
@@ -49,4 +49,3 @@ export function delDevice(deviceId) {
 
 
 
-  
