@@ -86,13 +86,53 @@ public class SysDeviceServiceImpl implements ISysDeviceService
                 }
                 devices.add(device);
             }
-            return devices;
+                return devices;
         }catch (Exception e){
             e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * 查询设备信息
+     * @param id 设备信息管理主键
+     * @return
+     */
+//    @Override
+//    public SysDevice selectSysDeviceByDeviceId(Long id) {
+//        return null;
+//    }
+
+    /**
+     * 新增设备
+     * @param sysDevice
+     * @return 结果
+     */
+    @Override
+    public int insertSysDevice(SysDevice sysDevice) {
+
+        return 0;
+    }
+
+    /**
+     * 更新设备信息
+     * @param sysDevice
+     * @return
+     */
+//    @Override
+//    public int updateSysDevice(SysDevice sysDevice) {
+//        return 0;
+//    }
+
+    /**
+     * 删除设备
+     * @param
+     * @return
+     */
+//    @Override
+//    public int deleteSysDeviceByDeviceId(Long id) {
+//        return 0;
+//    }
 
 
     public String get(String url) throws Exception {

@@ -1,17 +1,18 @@
 package com.ruoyi.system.controller;
 
+import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.system.domain.SysDevice;
 import com.ruoyi.system.service.ISysDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * @Description:
+ * @Description: 设备信息管理Controller
  * @Author: JavaSkx
  * @Date: 2023/4/20 13:50
  * @Version: 1.0
@@ -24,7 +25,7 @@ public class SysDeviceController extends BaseController {
     private ISysDeviceService deviceService;
 
     /**
-     * 查询水质信息管理列表
+     * 查询设备信息管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:device:list')")
     @GetMapping("/list")
@@ -33,6 +34,36 @@ public class SysDeviceController extends BaseController {
         startPage();
         return getDataTable(deviceService.selectDeviceInfo(sysDevice));
     }
+
+    /**
+     * 新增设备
+     */
+    @PreAuthorize("@ss.hasPermi('system:device:add')")
+    @Log(title = "设备管理", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody SysDevice sysDevice) {
+        return toAjax(deviceService.insertSysDevice(sysDevice));
+    }
+
+//    /**
+//     * 修改设备信息
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:device:edit')")
+//    @PutMapping
+//    public AjaxResult edit(@RequestBody Long id) {
+//    return toAjax(deviceService.updateSysDevice(id));
+//    }
+//
+//    /**
+//     * 删除设备
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:device:remove')")
+//    @DeleteMapping("/id}")
+//    public AjaxResult remove(@PathVariable Long id)
+//    {
+//        return toAjax(deviceService.deleteSysDeviceByDeviceId(id));
+//    }
+
 
 
 
