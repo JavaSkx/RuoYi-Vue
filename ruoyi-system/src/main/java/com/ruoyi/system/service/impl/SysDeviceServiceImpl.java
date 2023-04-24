@@ -1,11 +1,14 @@
 package com.ruoyi.system.service.impl;
 
 import com.alibaba.fastjson2.util.DateUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysDevice;
 import com.ruoyi.system.domain.SysWater;
 import com.ruoyi.system.domain.vo.LocationVo;
 import com.ruoyi.system.domain.vo.OtherVo;
+import com.ruoyi.system.domain.vo.SysDeviceAddVo;
+import com.ruoyi.system.domain.vo.SysDeviceUpdateVo;
 import com.ruoyi.system.mapper.SysWaterMapper;
 import com.ruoyi.system.service.ISysDeviceService;
 import com.ruoyi.system.service.ISysWaterService;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -39,9 +43,9 @@ public class SysDeviceServiceImpl implements ISysDeviceService
             String query = sysDevice.toQueryString();
             String result = "";
             if(StringUtils.isNotEmpty(query)){
-                result = get("http://api.heclouds.com/devices?"+query);
+                result = get("http://api.heclouds.com/devices?"+query,"GET");
             }else{
-                result = get("http://api.heclouds.com/devices");
+                result = get("http://api.heclouds.com/devices","GET");
             }
             JSONObject jsonObject = new JSONObject(result);
             JSONArray devicesArray = jsonObject.getJSONObject("data").getJSONArray("devices");
@@ -65,8 +69,12 @@ public class SysDeviceServiceImpl implements ISysDeviceService
                 if(deviceObject.has("other")){
                     JSONObject other = deviceObject.getJSONObject("other");
                     OtherVo otherVo = new OtherVo();
-                    otherVo.setVersion(other.getString("version"));
-                    otherVo.setManufacturer(other.getString("manufacturer"));
+                    if(other.has("version")){
+                        otherVo.setVersion(other.getString("version"));
+                    }
+                    if(other.has("manufacturer")){
+                        otherVo.setManufacturer(other.getString("manufacturer"));
+                    }
                     device.setOther(otherVo);
                 }
                 if(deviceObject.has("location")){
@@ -86,22 +94,14 @@ public class SysDeviceServiceImpl implements ISysDeviceService
                 }
                 devices.add(device);
             }
-                return devices;
+            return devices;
         }catch (Exception e){
             e.printStackTrace();
         }
         return null;
     }
 
-    /**
-     * 查询设备信息
-     * @param id 设备信息管理主键
-     * @return
-     */
-//    @Override
-//    public SysDevice selectSysDeviceByDeviceId(Long id) {
-//        return null;
-//    }
+
 
     /**
      * 新增设备
@@ -109,38 +109,112 @@ public class SysDeviceServiceImpl implements ISysDeviceService
      * @return 结果
      */
     @Override
-    public int insertSysDevice(SysDevice sysDevice) {
-
+    public int insertSysDevice(SysDeviceAddVo sysDevice) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJson = objectMapper.writeValueAsString(sysDevice);
+            JSONObject jsonObject = margePostJon(postJson);
+            String response = post("http://api.heclouds.com/devices", jsonObject.toString(),"POST");
+            JSONObject result = new JSONObject(response);
+            if(result.getInt("errno")==0){
+                return 1;
+            }else{
+                return 0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return 0;
     }
 
+
+    private JSONObject margePostJon(String postJson){
+        JSONObject jsonObject = new JSONObject(postJson);
+        JSONObject other = jsonObject.getJSONObject("other");
+        if(other.isNull("version")&&other.isNull("manufacturer")){
+            jsonObject.remove("other");
+        }
+        if(jsonObject.getJSONArray("tags").length()==0  ){
+            jsonObject.remove("tags");
+        }
+        if(jsonObject.isNull("auth_info")){
+            jsonObject.remove("auth_info");
+        }
+        if(jsonObject.isNull("title")){
+            jsonObject.remove("title");
+        }
+        if(jsonObject.isNull("desc")){
+            jsonObject.remove("desc");
+        }
+        return jsonObject;
+    }
     /**
      * 更新设备信息
-     * @param sysDevice
+     * @param sysDeviceUpdateVo
      * @return
      */
-//    @Override
-//    public int updateSysDevice(SysDevice sysDevice) {
-//        return 0;
-//    }
+    @Override
+    public int updateSysDevice(SysDeviceUpdateVo sysDeviceUpdateVo) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String postJson = objectMapper.writeValueAsString(sysDeviceUpdateVo);
+            JSONObject jsonObject = margePostJon(postJson);
+            Long deviceId = null;
+            if(jsonObject.has("deviceId")){
+                deviceId = jsonObject.getLong("deviceId");
+                jsonObject.remove("deviceId");
+            }
+            if(jsonObject.has("auth_info")){
+                SysDevice sysDevice = new SysDevice();
+                sysDevice.setAuthInfo(jsonObject.getString("auth_info"));
+                sysDevice.setPage(1);
+                sysDevice.setPer_page(10);
+                List<SysDevice> sysDevices = this.selectDeviceInfo(sysDevice);
+                if(sysDevices.size()>0&&sysDevices.get(0).getAuthInfo().equals(jsonObject.getString("auth_info"))){
+                    jsonObject.remove("auth_info");
+                }
+            }
+            String response = post("http://api.heclouds.com/devices/"+deviceId, jsonObject.toString(),"PUT");
+            JSONObject result = new JSONObject(response);
+            if(result.getInt("errno")==0){
+                return 1;
+            }else{
+                return 0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     /**
      * 删除设备
      * @param
      * @return
      */
-//    @Override
-//    public int deleteSysDeviceByDeviceId(Long id) {
-//        return 0;
-//    }
+    @Override
+    public int deleteSysDeviceByDeviceId(Long id) {
+        try {
+            String response = get("http://api.heclouds.com/devices/"+id,"DELETE");
+            JSONObject result = new JSONObject(response);
+            if(result.getInt("errno")==0){
+                return 1;
+            }else{
+                return 0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 
-    public String get(String url) throws Exception {
+    public String get(String url,String methodName) throws Exception {
         String content = null;
         URLConnection urlConnection = new URL(url).openConnection();
         HttpURLConnection connection = (HttpURLConnection) urlConnection;
         connection.setRequestProperty("api-Key","stzJxV=iGEoWNgepYJv5sW1PTGc=");
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod(methodName);
         //连接
         connection.connect();
         //得到响应码
@@ -156,5 +230,31 @@ public class SysDeviceServiceImpl implements ISysDeviceService
             content = bs.toString();
         }
         return content;
+    }
+
+
+
+    public String post(String url,String requestBody,String methodName) throws Exception {
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+        con.setRequestMethod(methodName);
+        con.setRequestProperty("api-Key","stzJxV=iGEoWNgepYJv5sW1PTGc=");
+        con.setRequestProperty("Content-Type", "application/json");
+
+        con.setDoOutput(true);
+        OutputStream os = con.getOutputStream();
+        os.write(requestBody.getBytes("UTF-8"));
+        os.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        return response.toString();
     }
 }

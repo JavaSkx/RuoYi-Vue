@@ -90,44 +90,55 @@
                         </el-table-column>
                 </el-table>
                 <div class="block">
-                    <el-pagination
-                    @size-change="handleSizeChange"
-                    @current-change="handleCurrentChange"
-                    :current-page.sync="currentPage3"
-                    :page-size=pageSize
-                    layout="prev, pager, next, jumper"
-                    :total=total>
-                    </el-pagination>
+                      <pagination
+                        v-show="total>0"
+                        :total="total"
+                        :page.sync="queryParams.page"
+                        :limit.sync="queryParams.per_page"
+                        @pagination="getList"
+                      />
                 </div>
             </div>
         </div>
              <!-- 添加或修改设备信息管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="设备名称：" prop="deviceTitle">
-          <el-input v-model="form.deviceTitle" placeholder="请输入设备名称" />
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="设备名称：" prop="title" >
+          <el-input v-model="form.title" placeholder="请输入设备名称" />
         </el-form-item>
         <el-form-item label="鉴权信息：" prop="auth_info">
           <el-input v-model="form.auth_info" placeholder="请输入设备鉴权信息" />
-        </el-form-item>
-        <el-form-item label="设备私密性：" prop="private">
-          <el-input v-model="form.private" placeholder="私有/公开" />
         </el-form-item>
         <el-form-item label="设备描述：" prop="desc">
           <el-input v-model="form.desc" placeholder="请输入设备描述" />
         </el-form-item>
         <el-form-item label="设备标签：" prop="tags">
-          <el-input v-model="form.tags" placeholder="请输入设备标签" />
+          <!-- <el-input v-model="form.tags" placeholder="请输入设备标签" /> -->
+          <el-select v-model="form.tags" multiple placeholder="请选择">
+            <el-option
+              v-for="item in tagOpertions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
+
         <el-form-item label="坐标信息：" prop="location">
-          <el-input v-model="form.location" placeholder="请输入设备坐标信息" />
+          <el-input-number v-model="form.location.lon" :step="0.1" :max="1000" :min="-1000"></el-input-number>
+           <span>&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;</span>
+           <el-input-number v-model="form.location.lat" :step="0.1" :max="1000" :min="-1000"></el-input-number>
         </el-form-item>
         <el-form-item label="自定义：" prop="other">
-          <el-input v-model="form.other" placeholder="请输入其他设备自定义信息" />
+          <label>版本号：</label>
+          <el-input style="width:40%" v-model="form.other.version" placeholder="请输入设备版本号信息" />
+          <br>
+          <label>制造商：</label>
+          <el-input style="width:40%;padding-top: 10px;" v-model="form.other.manufacturer" placeholder="请输入设备制造商信息" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="">确 定</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
@@ -147,6 +158,7 @@ export default {
     name: 'Dashboard',
     components: {ShowDiv},
     created() {
+        this.getAllList();
         this.getList();
     },
     methods: {
@@ -157,14 +169,20 @@ export default {
     },
     // 表单重置
     reset() {
+      this.deviceid=null,
       this.form = {
-        deviceTitle: null,
+        title:null,
         desc:null,
         tags:null,
-        location:null,
-        private:null,
+        location:{
+          lon:0,
+          lat:0
+        },
         auth_info:null,
-        other:null
+        other:{
+          version:null,
+          manufacturer:null,
+        }
       };
       this.resetForm("form");
     },
@@ -177,29 +195,84 @@ export default {
       /**数据表格*/
       getList() {
         this.loading = true;
-        listDevice(this.queryParams).then(response => {
-            this.deviceList = response.rows;
+        let param={
+            page:1,
+            per_page:2147483647
+          }
+        listDevice(param).then(response => {
             this.total = response.total;
-            this.loading = false;
-            this.deviceTotal = response.total;
-
-            for(let i=0;i<deviceList.length;i++){
-                if([deviceList].online==true){
-                   this.onlineTotal++;
-                }
-            }
+            this.loading=false;
         });
+        listDevice(this.queryParams).then(response => {
+            this.deviceList=response.rows;
+            this.loading = false;
+        });
+       },
+
+       getAllList() {
+          this.loading=true;
+          let param={
+            page:1,
+            per_page:2147483647
+          }
+          listDevice(param).then(response => {
+             this.deviceTotal = response.total;
+             this.loading=false;
+          })
        },
        /** 搜索按钮操作 */
       handleQuery() {
-        this.queryParams.pageNum = 1;
+        this.queryParams.page = 1;
         this.getList();
       },
-       /** 修改按钮操作 */
-     handleUpdate(row) {
-        this.reset();
-        //业务逻辑
-     },
+    /** 修改按钮操作 */
+    handleUpdate(row) {
+      this.reset();
+      const deviceId = row.id || this.ids
+      getDevice(deviceId).then(response => {
+        this.deviceid=deviceId;
+        if(response.rows[0].other!=null){
+          this.form.other=response.rows[0].other;
+        }
+        if(response.rows[0].location!=null){
+          this.form.location=response.rows[0].location;
+        }
+        this.form.auth_info = response.rows[0].authInfo;
+        this.form.desc=response.rows[0].desc;
+        this.form.title=response.rows[0].title;
+        this.form.tags=response.rows[0].tags;
+        this.open = true;
+        this.title = "修改设备信息管理";
+      });
+    },
+
+  /** 提交按钮 */
+  submitForm() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.deviceid != null) {
+            this.form.deviceId=this.deviceid
+            updateDevice(this.form).then(response => {
+              this.$modal.msgSuccess("修改成功");
+              this.open = false;
+              this.getList();
+            });
+          } else {
+            addDevice(this.form).then(response => {
+              if(response.code==200){
+                  this.$modal.msgSuccess("新增成功");
+                  this.open = false;
+                  this.getAllList();
+                  this.getList();
+              }else{
+                this.$modal.msg("新增失败");
+              }
+            });
+          }
+        }
+      });
+    },
+
         /** 新增按钮操作 */
     handleAdd() {
       this.reset();
@@ -209,10 +282,11 @@ export default {
 
       /** 删除按钮操作 */
     handleDelete(row) {
-      const deviceIds = row.deviceId || this.ids;
-      this.$modal.confirm('是否确认删除设备信息管理编号为"' + deviceId + '"的数据项？').then(function() {
-        return delWater(deviceIds);
+      const deviceIds = row.id || this.ids;
+      this.$modal.confirm('是否确认删除设备信息管理编号为"' + deviceIds + '"的数据项？').then(function() {
+        return delDevice(deviceIds);
       }).then(() => {
+        this.getAllList();
         this.getList();
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
@@ -232,21 +306,38 @@ export default {
                 value: 'false',
                 label: '离线'
             }],
+            tagOpertions: [{
+                value: 'china',
+                label: 'china'
+            }, {
+                value: 'mobile',
+                label: 'mobile'
+            }],
             deviceList:[],
             value: '',
+            deviceid:'',
             input3: '',
             select: '',
             title: '',
             open: false,
-            currentPage3: 2,
-            pageSize:100,
-            total:150,
+            currentPage3: 1,
+            per_page:10,
+            total:0,
             deviceTotal:0,
             onlineTotal:0,
              // 表单参数
-            form: {},
+            form: {
+              location:{
+                lon:0,
+                lat:0
+              },
+              other:{
+                version:null,
+                manufacturer:null,
+              }
+            },
             rules: {
-                deviceTitle: [
+                title: [
                 { required: true, message: "设备名称不能为空", trigger: "blur" }
                 ],
                 auth_info: [
@@ -258,8 +349,8 @@ export default {
             },
                  // 查询参数
             queryParams: {
-                pageNum: 1,
-                pageSize: 10,
+                page: 1,
+                per_page: 10,
                 online: null,
                 title: null
             },
@@ -345,4 +436,12 @@ export default {
     margin-bottom: 10px;
     display: block;
 }
+
+.el-input-number--medium{
+  width: 130px;
+  line-height: 34px
+}
+
+
+
 </style>

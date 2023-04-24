@@ -23,6 +23,8 @@ public class SysDevice extends BaseEntity
     /** 设备ID */
     private Long id;
 
+    private Long device_id;
+
     private String title;
 
     private String protocol;
@@ -44,6 +46,26 @@ public class SysDevice extends BaseEntity
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastLogin;
+
+    private int page;
+
+    private int per_page;
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPer_page() {
+        return per_page;
+    }
+
+    public void setPer_page(int per_page) {
+        this.per_page = per_page;
+    }
 
     public Date getLastLogin() {
         return lastLogin;
@@ -133,6 +155,14 @@ public class SysDevice extends BaseEntity
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public Long getDevice_id() {
+        return device_id;
+    }
+
+    public void setDevice_id(Long device_id) {
+        this.device_id = device_id;
     }
 
     public String toQueryString() throws Exception {

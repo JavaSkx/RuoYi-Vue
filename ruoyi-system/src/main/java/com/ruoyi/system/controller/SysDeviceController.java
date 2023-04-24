@@ -6,6 +6,8 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.system.domain.SysDevice;
+import com.ruoyi.system.domain.vo.SysDeviceAddVo;
+import com.ruoyi.system.domain.vo.SysDeviceUpdateVo;
 import com.ruoyi.system.service.ISysDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,28 +43,28 @@ public class SysDeviceController extends BaseController {
     @PreAuthorize("@ss.hasPermi('system:device:add')")
     @Log(title = "设备管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
-    public AjaxResult add(@RequestBody SysDevice sysDevice) {
+    public AjaxResult add(@RequestBody SysDeviceAddVo sysDevice) {
         return toAjax(deviceService.insertSysDevice(sysDevice));
     }
 
-//    /**
-//     * 修改设备信息
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:device:edit')")
-//    @PutMapping
-//    public AjaxResult edit(@RequestBody Long id) {
-//    return toAjax(deviceService.updateSysDevice(id));
-//    }
-//
-//    /**
-//     * 删除设备
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:device:remove')")
-//    @DeleteMapping("/id}")
-//    public AjaxResult remove(@PathVariable Long id)
-//    {
-//        return toAjax(deviceService.deleteSysDeviceByDeviceId(id));
-//    }
+    /**
+     * 修改设备信息
+     */
+    @PreAuthorize("@ss.hasPermi('system:device:edit')")
+    @PostMapping("/update")
+    public AjaxResult edit(@RequestBody SysDeviceUpdateVo sysDeviceUpdateVo) {
+         return toAjax(deviceService.updateSysDevice(sysDeviceUpdateVo));
+    }
+
+    /**
+     * 删除设备
+     */
+    @PreAuthorize("@ss.hasPermi('system:device:remove')")
+    @DeleteMapping("/delete/{id}")
+    public AjaxResult remove(@PathVariable Long id)
+    {
+        return toAjax(deviceService.deleteSysDeviceByDeviceId(id));
+    }
 
 
 
