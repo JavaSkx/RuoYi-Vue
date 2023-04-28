@@ -10,9 +10,6 @@
                                     <show-div :title="'设备数量(个)'" :text="deviceTotal" />
                                  </el-col>
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
-<!--                                <el-col :span="4">-->
-<!--                                    <show-div :title="'在线设备数(个)'" :text="onlineTotal" text-color="#C80000" />-->
-<!--                                </el-col>-->
                                 <el-divider direction="vertical" class="total-middle-divider"></el-divider>
 
 
