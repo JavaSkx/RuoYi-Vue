@@ -164,7 +164,6 @@
         <module>ruoyi-framework</module>
         <module>ruoyi-system</module>
         <module>ruoyi-common</module>
-        <module>ruoyi-onenet</module>
     </modules>
     <packaging>pom</packaging>
 

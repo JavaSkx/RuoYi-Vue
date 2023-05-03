@@ -12,7 +12,6 @@ public class LocationVo {
 
     private Double lon;
 
-
     public Double getLat() {
         return lat;
     }
@@ -28,4 +27,5 @@ public class LocationVo {
     public void setLon(Double lon) {
         this.lon = lon;
     }
+
 }
