@@ -36,7 +36,7 @@
             <if test="updateTime != null "> and DATE_FORMAT(update_time, '%Y-%m-%d') = DATE_FORMAT(#{updateTime}, '%Y-%m-%d')</if>
             <if test="rk != null  and rk != ''"> and rk like concat('%', #{rk}, '%')</if>
         </where>
-        order by update_time desc
+        order by water_name, update_time desc
     </select>
 
     <select id="selectSysWaterByWaterId" parameterType="Long" resultMap="SysWaterResult">
