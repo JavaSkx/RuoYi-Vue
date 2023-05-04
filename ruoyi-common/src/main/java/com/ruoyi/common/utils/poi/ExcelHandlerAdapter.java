@@ -3,7 +3,7 @@ package com.ruoyi.common.utils.poi;
 /**
  * Excel数据格式处理适配器
  * 
- * @author ruoyi
+ * @author skx
  */
 public interface ExcelHandlerAdapter
 {

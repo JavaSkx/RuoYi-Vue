@@ -3,7 +3,7 @@ package com.ruoyi.common.exception.user;
 /**
  * 用户不存在异常类
  * 
- * @author ruoyi
+ * @author skx
  */
 public class UserNotExistsException extends UserException
 {

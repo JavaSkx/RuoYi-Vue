@@ -18,7 +18,7 @@ import com.ruoyi.common.utils.uuid.Seq;
 /**
  * 文件上传工具类
  *
- * @author ruoyi
+ * @author skx
  */
 public class FileUploadUtils
 {

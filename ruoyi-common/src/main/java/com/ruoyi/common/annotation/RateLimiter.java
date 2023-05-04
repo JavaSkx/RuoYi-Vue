@@ -11,7 +11,7 @@ import com.ruoyi.common.enums.LimitType;
 /**
  * 限流注解
  * 
- * @author ruoyi
+ * @author skx
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
