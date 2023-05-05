@@ -62,7 +62,9 @@ public class SysDeviceServiceImpl implements ISysDeviceService
                 }
                 device.setId(deviceObject.getLong("id"));
                 device.setTitle(deviceObject.getString("title"));
-                device.setDesc(deviceObject.getString("desc"));
+                if(deviceObject.has("desc")){
+                    device.setDesc(deviceObject.getString("desc"));
+                }
                 if(deviceObject.has("auth_info")){
                     device.setAuthInfo(deviceObject.getString("auth_info"));
                 }
@@ -114,6 +116,9 @@ public class SysDeviceServiceImpl implements ISysDeviceService
             ObjectMapper objectMapper = new ObjectMapper();
             String postJson = objectMapper.writeValueAsString(sysDevice);
             JSONObject jsonObject = margePostJon(postJson);
+            if (!jsonObject.has("tags")){
+                jsonObject.remove("tags");
+            }
             String response = post("http://api.heclouds.com/devices", jsonObject.toString(),"POST");
             JSONObject result = new JSONObject(response);
             if(result.getInt("errno")==0){
@@ -134,7 +139,9 @@ public class SysDeviceServiceImpl implements ISysDeviceService
         if(other.isNull("version")&&other.isNull("manufacturer")){
             jsonObject.remove("other");
         }
-        if(jsonObject.getJSONArray("tags").length()==0  ){
+        if (!jsonObject.has("tags")
+                ||jsonObject.isNull("tags")
+                ||jsonObject.getJSONArray("tags").length()==0){
             jsonObject.remove("tags");
         }
         if(jsonObject.isNull("auth_info")){
