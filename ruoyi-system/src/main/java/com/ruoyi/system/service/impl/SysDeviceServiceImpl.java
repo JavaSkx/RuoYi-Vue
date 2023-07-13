@@ -34,7 +34,8 @@ import java.util.List;
  * @date 2023-04-20
  */
 @Service
-public class SysDeviceServiceImpl implements ISysDeviceService
+public class  SysDeviceServiceImpl implements ISysDeviceService
+//    主要是业务模块 跨域随便说两句  一个人答辩 + 提问就 10分钟
 {
 
     @Override
@@ -94,7 +95,11 @@ public class SysDeviceServiceImpl implements ISysDeviceService
                     }
                     device.setTags(tagList);
                 }
-                devices.add(device);
+                //你这个相当于从onenet平台取数据让后后台用list接收，那这个部分是不是也顺便通过转发解决了跨域问题呢，就没有用到那个
+                //跨域问题是你访问的接口那边解决的，，明白l他那边既然能让你访问，那肯定是解决了跨
+                //跨域是针对一次的请求，比如你再这个业务层访问api 就跟你前面设置的跨越没关系，除非经过你的其他接口
+                //
+                devices.add(device); // 上面是先从API接口 拿到数据 然后解析 add进来吗
             }
             return devices;
         }catch (Exception e){
@@ -215,7 +220,10 @@ public class SysDeviceServiceImpl implements ISysDeviceService
         return 0;
     }
 
-
+    //这个get 不就是一个服务器的连接吗
+//    是的，我这不知道 咋语言说好
+//        这块没啥说的
+//    就说通过那些参数来获取连接就完事这 两个 模块是封装了一下 其他地方直接用了
     public String get(String url,String methodName) throws Exception {
         String content = null;
         URLConnection urlConnection = new URL(url).openConnection();
@@ -238,8 +246,6 @@ public class SysDeviceServiceImpl implements ISysDeviceService
         }
         return content;
     }
-
-
 
     public String post(String url,String requestBody,String methodName) throws Exception {
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
